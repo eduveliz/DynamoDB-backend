@@ -1,14 +1,8 @@
 import AWS from 'aws-sdk';
+import Config from "../../config/config";
 
-
-const awsConfig = {
-    apiVersion: "2012-08-10",
-    accessKeyId: "",
-    secretAccessKey: "",
-    region: 'us-east-1'
-}
-
-AWS.config.update(awsConfig);
+const config = new Config().awsConfig
+AWS.config.update(config);
 
 const dynamodb = new AWS.DynamoDB();
 
