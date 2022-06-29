@@ -1,13 +1,16 @@
 import AWS from 'aws-sdk';
 import Config from "../../config/config";
+import {ISong} from "../../Interface/Interface";
 
 const config = new Config().awsConfig
 AWS.config.update(config);
 
 export default function loadData() {
     const documentClient = new AWS.DynamoDB.DocumentClient();
+
     console.log("Loading song data into DynamoDB");
-    const songs = [{
+
+    const songs: ISong[] = [{
         "artist": "the killers",
         "song": "where you was young",
         "id": 2,
@@ -15,7 +18,7 @@ export default function loadData() {
         "publisher": 2000
     }]
 
-    songs.forEach(function (song) {
+    songs.forEach(function (song: ISong) {
         const params = {
             TableName: "basicSongsTable",
             Item: {
