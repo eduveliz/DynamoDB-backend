@@ -1,19 +1,14 @@
-import AWS from 'aws-sdk';
-import Config from "../../config/config";
+import Dynamo from "../../Services/Dynamo";
 import {ISong} from "../../Interface/Interface";
 
-const config = new Config().awsConfig
-AWS.config.update(config);
-
 export default function loadData() {
-    const documentClient = new AWS.DynamoDB.DocumentClient();
-
+    const dynamo = new Dynamo()
     console.log("Loading song data into DynamoDB");
 
     const songs: ISong[] = [{
-        "artist": "the killers",
-        "song": "where you was young",
-        "id": 2,
+        "artist": "Gustavo Cerati",
+        "song": "Un misil en mi placar",
+        "id": 3,
         "priceUsdCents": 120,
         "publisher": 2000
     }]
@@ -30,9 +25,9 @@ export default function loadData() {
             }
         };
 
-        documentClient.put(params, function (err, data) {
+        dynamo.ddbDocumentClient.put(params, function (err, data) {
             if (err) {
-                console.error("Can't add song. Darn. Well I guess Fernando needs to write better scripts.");
+                console.log(err)
             } else {
                 console.log("Succeeded adding an item for this song: ", song.song);
             }

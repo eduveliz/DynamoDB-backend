@@ -1,10 +1,6 @@
-import AWS from 'aws-sdk';
-import Config from "../../config/config";
+import Dynamo from "../../Services/Dynamo";
 
-const config = new Config().awsConfig
-AWS.config.update(config);
-
-const dynamodb = new AWS.DynamoDB();
+const dynamo = new Dynamo()
 
 export default class CreateTable {
 
@@ -43,7 +39,7 @@ export default class CreateTable {
             TableName: "basicSongsTable"
         };
 
-        dynamodb.createTable(params, function (err, data) {
+        dynamo.connection.createTable(params, function (err, data) {
             if (err) {
                 console.log("Error", err);
             } else {
