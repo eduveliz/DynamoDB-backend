@@ -1,7 +1,8 @@
 import express from 'express';
 import CreateTable from "./modules/CreateTable/CreateTable";
 import loadData from "./modules/LoadData/LoadData";
-import GetSongs from "./modules/GetTableData/GetSongs";
+import GetSongs from "./modules/GetSongs/GetSongs";
+import GetSongByLetter from "./modules/GetSongByLetter/GetSongByLetter";
 
 const app = express();
 const port = 3000;
@@ -21,8 +22,14 @@ app.get('/load', (req, res) => {
     res.send('Load data complete');
 });
 
-app.get('/data', (req, res) => {
+app.get('/songs', (req, res) => {
     GetSongs().then(songs => {
+        res.send(songs);
+    })
+});
+
+app.get('/song', (req, res) => {
+    GetSongByLetter().then(songs => {
         res.send(songs);
     })
 });

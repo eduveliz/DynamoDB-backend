@@ -1,7 +1,8 @@
 export interface ISong {
+    title: string,
     artist: string
-    song: string,
-    id: number,
-    priceUsdCents: number,
-    publisher: number
+    year: string
+    web_url: string,
+    img_url: string
+    id: number
 }

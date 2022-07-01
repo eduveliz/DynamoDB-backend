@@ -1,27 +1,20 @@
 import Dynamo from "../../Services/Dynamo";
 import {ISong} from "../../Interface/Interface";
+import {data} from "./songs";
 
 export default function loadData() {
     const dynamo = new Dynamo()
     console.log("Loading song data into DynamoDB");
 
-    const songs: ISong[] = [{
-        "artist": "Gustavo Cerati",
-        "song": "Un misil en mi placar",
-        "id": 3,
-        "priceUsdCents": 120,
-        "publisher": 2000
-    }]
-
-    songs.forEach(function (song: ISong) {
+    data.songs.forEach((song: ISong, index: number) => {
         const params = {
             TableName: "basicSongsTable",
             Item: {
                 "artist": song.artist,
-                "song": song.song,
-                "id": song.id,
-                "priceUsdCents": song.priceUsdCents,
-                "publisher": song.publisher
+                "song": song.title,
+                "id": index,
+                "web_url": song.web_url,
+                "img_url": song.img_url
             }
         };
 
@@ -29,7 +22,7 @@ export default function loadData() {
             if (err) {
                 console.log(err)
             } else {
-                console.log("Succeeded adding an item for this song: ", song.song);
+                console.log("Succeeded adding an item for this song: ", song.title);
             }
         });
     });
