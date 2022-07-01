@@ -3,6 +3,7 @@ import CreateTable from "./modules/CreateTable/CreateTable";
 import loadData from "./modules/LoadData/LoadData";
 import GetSongs from "./modules/GetSongs/GetSongs";
 import GetSongByLetter from "./modules/GetSongByLetter/GetSongByLetter";
+import GetSongByArtist from "./modules/GetSongByArtist/GetSongByArtist";
 
 const app = express();
 const port = 3000;
@@ -31,6 +32,12 @@ app.get('/songs', (req, res) => {
 app.get('/song', (req, res) => {
     GetSongByLetter().then(songs => {
         res.send(songs);
+    })
+});
+
+app.get('/artist', (req, res) => {
+    GetSongByArtist().then(artist => {
+        res.send(artist);
     })
 });
 
