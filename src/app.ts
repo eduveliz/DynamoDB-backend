@@ -12,13 +12,13 @@ app.get('/', (req, res) => {
     res.send('Working !!!');
 });
 
-app.get('/createTable', (req, res) => {
+app.post('/createTable', (req, res) => {
     const createTable = new CreateTable("test")
     createTable.create()
     res.send('Create data complete');
 });
 
-app.get('/loadSongs', (req, res) => {
+app.post('/loadSongs', (req, res) => {
     loadData()
     res.send('Load data complete');
 });

@@ -11,6 +11,5 @@ export default async function GetSongs() {
     } catch (error) {
         console.error(error);
     }
-
 }
 
